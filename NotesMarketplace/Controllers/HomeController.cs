@@ -4,27 +4,42 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace NotesMarketplace.Controllers
 {
     public class HomeController : Controller
-    {
-        public ActionResult Index()
+   {
+        private Models.NotesMarketplaceEntities db = new Models.NotesMarketplaceEntities();
+        public ActionResult SignUp()
+        {
+            return View();
+            
+        }
+
+        [HttpPost]
+        public ActionResult SignUp(Models.User user)
+        {
+            try
+            {
+                user.IsActive = true;
+                user.IsDetailsSubmitted = false;
+                user.IsActive = true;
+                user.F_K_UserRoles = 1;
+
+                db.Users.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Login", "HomeController");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Login()
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }
