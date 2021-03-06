@@ -1,36 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@model NotesMarketplace.User
 
-<head>
-
-    <!-- important meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0 ,user-scalable=no">
-
-    <!-- Title -->
-    <title>Sign Up Page</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/Content/images/favicon/favicon.ico">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awsome -->
-    <link rel="stylesheet" href="/Content/css/font-awesome/css/font-awesome.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/Content/css/bootstrap/bootstrap.min.css">
-
-    <!-- Custome CSS -->
-    <link rel="stylesheet" href="/Content/css/style.css">
-
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="/Content/css/responsive.css">
-
-</head>
-
-<body class="fullsize">
+@{ 
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/Member.cshtml";
+}
 
     <!-- Sign Up Form -->
     <section id="my-background">
@@ -56,71 +29,71 @@
                             <h2>Create an Account</h2>
                             <p>Enter your details to signup</p>
                         </div>
-
-                        <div class="text-center text2">
-                            <p><span><i class="fa fa-check-circle"></i> Your account has been successfully created.</span></p>
+                        <div class="text-center text2 accountflage">
+                            @{
+                                if (ViewBag.flag == "Exits")
+                                {
+                                    <p><span><i class="fa fa-check-circle"></i> Your account has been successfully created.</span></p>
+                                    ViewBag.flag = null;
+                                }
+                            }
                         </div>
-                        <!-- Form -->
-                        <form method="post">
+                            <!-- Form -->
+                            <form method="post" name="Registration">
 
-                            <!-- First Name -->
-                            <div class="form-group">
-                                <label class="mylabel" for="InputEmail1">First Name *</label>
-                                <input name="FirstName" maxlength="50" type="text" class="form-control InputEmail1" aria-describedby="emailHelp" placeholder="Enter your First Name">
-                            </div>
-
-                            <!-- Last Name -->
-                            <div class="form-group">
-                                <label class="mylabel" for="InputEmail1">Last Name *</label>
-                                <input name="LastName" maxlength="50" type="text" class="form-control InputEmail1" aria-describedby="emailHelp" placeholder="Enter your Last Name">
-                            </div>
-
-                            <!-- Email -->
-                            <div class="form-group">
-                                <label class="mylabel" for="InputEmail1">Email *</label>
-                                <input name="EmailId" maxlength="100" type="email" class="form-control InputEmail1" aria-describedby="emailHelp" placeholder="Enter your Email Address">
-                            </div>
-
-                            <!-- Password 1-->
-                            <div class="form-group">
-                                <label class="mylabel InputPassword1">Password</label>
-
-                                <!-- Eye icon -->
-                                <div class="wrapper">
-                                    <input name="Password" maxlength="24" type="password" class="form-control InputEmail1 InputPassword1" placeholder="Enter your password">
-                                    <img class="pass-eye" src="/Content/images/pre-login/eye.png" alt="Show">
+                                <!-- First Name -->
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">First Name *</label>
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control InputEmail1", @placeholder = "Enter your First Name", @maxlength = "50" })
+                                    @Html.ValidationMessageFor(m => m.FirstName)
                                 </div>
-                            </div>
 
-                            <!-- Password 2-->
-                            <div class="form-group">
-                                <label class="mylabel InputPassword1">Confirm Password</label>
-                                <!-- Eye icon -->
-                                <div class="wrapper">
-                                    <input type="password" maxlength="24" class="form-control InputEmail1 tempspace InputPassword1" placeholder="Re-enter your password">
-                                    <img class="pass-eye" src="/Content/images/pre-login/eye.png" alt="Show">
+                                <!-- Last Name -->
+
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">Last Name *</label>
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control InputEmail1", @placeholder = "Enter your Last Name", @maxlength = "50" })
+                                    @Html.ValidationMessageFor(m => m.LastName)
                                 </div>
-                            </div>
 
-                            <!-- Login Button -->
-                            <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Sign Up</b></button>
-                        </form>
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label class="mylabel" for="InputEmail1">Email *</label>
+                                    @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control InputEmail1", @placeholder = "Enter your Email Address", @maxlength = "100" })
+                                    @Html.ValidationMessageFor(m => m.EmailId)
+                                </div>
 
-                        <p class="text-center mytext">Already have an account? <span>@Html.ActionLink("Log In", "LogIn")</span></p>
+                                <!-- Password 1-->
+                                <div class="form-group">
+                                    <label class="mylabel InputPassword1">Password</label>
+                                    <!-- Eye icon -->
+                                    <div class="wrapper">
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control InputEmail1 InputPassword1 pe1", @placeholder = "Enter your password", @type = "password", @maxlength = "24", @minlength = "6" })
+                                        <img class="pass-eye1" src="/Content/images/pre-login/eye.png" alt="Show">
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                </div>
 
-                    </div>
+                                <!-- Password 2-->
+                                <div class="form-group tempspace ">
+                                    <label class="mylabel InputPassword1">Confirm Password</label>
+                                    <!-- Eye icon -->
+                                    <div class="wrapper">
+                                        @Html.TextBoxFor(m => m.Password2, new { @class = "form-control InputEmail1 InputPassword1 pe2", @placeholder = "Re-enter your password", @type = "password", @maxlength = "24", @minlength = "6" })
+                                        <img class="pass-eye2" src="/Content/images/pre-login/eye.png" alt="Show">
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Password2)
+                                </div>
+
+                                <!-- Login Button -->
+                                <button type="submit" class="btn text-uppercase text-center" id="mybtn"><b>Sign Up</b></button>
+                            </form>
+
+                            <p class="text-center mytext">Already have an account? <span>@Html.ActionLink("Log In", "LogIn")</span></p>
+
+                        </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Sign Up Form End -->
-
-    <!-- JQuery -->
-    <script src="~/Content/js/jquery.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="~/Content/js/bootstrap/bootstrap.min.js"></script>
-
-    <!-- Custom JS -->
-    <script src="~/Content/js/script.js"></script>
-</body></html>

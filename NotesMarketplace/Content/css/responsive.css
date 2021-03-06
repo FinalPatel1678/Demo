@@ -102,6 +102,13 @@
          width: 200px;
      }
 
+    .myreview {
+        justify-content:center;
+    }
+    .field-validation-error {
+       font-size:12px;
+       line-height:15px;
+    }
      #loginlogo img,
      #forgotpasswordlogo img,
      #signuplogo img {
@@ -111,8 +118,8 @@
      Input[type=email],
      Input[type=password],
      Input[type=text],
-     Input[type=date] {
-         height: 40px;
+     Input[type=date] ,.abcd{
+         height: 40px !important;
      }
 
      select.form-control {
@@ -126,7 +133,7 @@
      }
 
      .InputEmail1:focus,
-     .InputPassword1:focus {
+     .InputPassword1:focus{
 
          font-size: 12px;
 
@@ -145,14 +152,6 @@
 
      .InputEmail1:-ms-input-placeholder,
      .InputPassword1:-ms-input-placeholder {
-         font-size: 12px;
-
-         line-height: 16px;
-
-     }
-
-     .InputEmail1::placeholder,
-     .InputPassword1::placeholder {
          font-size: 12px;
 
          line-height: 16px;
@@ -233,14 +232,14 @@
          margin-top: 100px;
      }
 
-     #search-page-second-section h3,
+    /* #search-page-second-section h3,
      #search-page-third-section h3 {
          text-align: center;
      }
 
      #search-page-second-section .filter-part .inputselect {
          margin: 5px 0;
-     }
+     }*/
 
      #email-verification .verification-content #mybtn {
          width: 450px;
@@ -439,10 +438,15 @@
          margin-bottom: 20px;
      }
 
-     .rate {
+     .vvv{
+         display:flex;
+         justify-content:center;
+     }
+
+    /* .rate {
          -webkit-transform: translateX(25%) !important;
          transform: translateX(25%) !important;
-     }
+     }*/
  }
 
  @media (max-width: 991.98px) {
@@ -468,14 +472,14 @@
          min-height: 100px;
      }
 
-     .review-text {
+    /* .review-text {
          text-align: center;
      }
 
      .rate {
          -webkit-transform: translateX(50%);
          transform: translateX(50%);
-     }
+     }*/
 
      #home-page-second-section.content-box-md h2 {
          font-size: 25px;
@@ -576,8 +580,7 @@
          font-size: 16px !important;
      }
 
-     #dashboard-second-section Input[type=email],
-     #dashboard-third-section Input[type=email] {
+     .abcd {
          width: 100%;
      }
 
@@ -637,7 +640,7 @@
          margin: 0 10px;
      }
 
-     #search-page-third-section .review-text {
+     /*#search-page-third-section .review-text {
          -webkit-transform: translate(-50%, 90%);
          transform: translate(-50%, 90%);
 
@@ -645,7 +648,7 @@
 
      #search-page-third-section .review-text p {
          font-size: 11px;
-     }
+     }*/
 
      #search-page-third-section .book-title {
          min-height: 90px;
@@ -663,9 +666,9 @@
          transform: translateX(50%) !important;
      }
 */
-     .rate {
+     /*.rate {
          margin-left: 28%;
-     }
+     }*/
      .docenter {
          text-align: center;
      }

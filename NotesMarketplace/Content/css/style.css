@@ -1,7 +1,32 @@
 html,
 body {
     height: 100%;
+    font-family: "Open Sans", sans-serif;
+}
+.field-validation-error {
+    color:red;
+    cursor:default;
+}
 
+.duallcenter {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.dopointer {
+    cursor: pointer !important;
+}
+
+textarea {
+    resize:none;
+}
+.InputPassword {
+    border:1px solid red !important;
+    border-left-width:3px !important;
+}
+
+.error {
+    color:red;
 }
 
 .doflex {
@@ -9,8 +34,8 @@ body {
     display: -ms-flexbox !important;
     display: flex !important;
 }
-.pass-eye{
-    cursor:pointer;
+.pass-eye1, .pass-eye2, .pass-eye3 {
+    cursor: pointer;
 }
 .inputselect {
     text-overflow: ellipsis;
@@ -120,12 +145,32 @@ Input[type=checkbox] {
     color: #fff;
     margin-top: 10px;
     border: none;
-    font-style: "Open Sans";
+    font-family: "Open Sans";
     font-size: 18px;
     line-height: 22px;
     width: 100%;
     -webkit-box-shadow: none;
 
+}
+.abcd.Input[type=email] {
+    width: 322px;
+    border: 1px solid #d1d1d1;
+    margin-bottom: 20px !important;
+    height: 50px !important;
+}
+.myreview {
+    display:flex;
+    align-items:center; 
+}
+.clearmar{
+    margin-bottom:10px !important;
+}
+
+.abcd {
+    width: 322px !important;
+    border: 1px solid #d1d1d1;
+    margin-bottom: 20px !important;
+    height: 50px !important;
 }
 
 /* Focus on Feilds */
@@ -156,15 +201,9 @@ Input[type=checkbox] {
     color: #8a8a8a;
 }
 
-.InputEmail1::placeholder,
-.InputPassword1::placeholder {
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 30px;
-    color: #8a8a8a;
+.InputEmail1{
+    height:50px;
 }
-
 /* Eye For Password Field */
 .wrapper {
     position: relative;
@@ -225,7 +264,7 @@ Input[type=checkbox] {
 
 .dropdown-menu {
     -webkit-box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 0 20 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
     border: none;
 }
 
@@ -253,6 +292,8 @@ ul.navbar-nav > li > a:focus {
     height: 40px;
     width: 40px;
     margin: 0 15px;
+    display:flex;
+    align-items:center;
 }
 
 /* White Navigation */
@@ -264,11 +305,11 @@ ul.navbar-nav > li > a:focus {
     z-index: 2;
 }
 
-.white-nav-top ul.navbar-nav > li > a:hover,
-.white-nav-top ul.navbar-nav > li > a:focus {
-    border-bottom: 3px solid #6255a5;
-    color: #6255a5;
-}
+    .white-nav-top ul.navbar-nav > li > a:hover,
+    .white-nav-top ul.navbar-nav > li > a:focus {
+        border-bottom: 3px solid #6255a5;
+        color: #6255a5;
+    }
 
 .white-nav-top ul.navbar-nav > li > a {
     color: #000;
@@ -277,7 +318,7 @@ ul.navbar-nav > li > a:focus {
 #mynavbtn {
     border-radius: 3px;
     background-color: #fff;
-    font-style: "Open Sans";
+    font-family: "Open Sans";
     font-size: 16px !important;
     color: #6255a5;
     width: 89px;
@@ -287,7 +328,7 @@ ul.navbar-nav > li > a:focus {
 
 .white-nav-top #mynavbtn {
     background-color: #6255a5;
-    color: #fff;
+    color: #fff !important;
 }
 
 /*===============================
@@ -395,7 +436,6 @@ ul.social-list li a {
     color: #FF3636;
     margin-top: 8px;
     margin-bottom: 10px;
-    display:none;
 }
 
 .mycheck123 {
@@ -860,14 +900,6 @@ select.form-control {
     color: #8a8a8a;
 }
 
-#search-page-second-section .filter-part input::placeholder {
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    color: #8a8a8a;
-}
-
 #search-page-second-section .first-input {
     margin-bottom: 20px;
 }
@@ -894,6 +926,7 @@ select.form-control {
 #search-page-third-section .book-info img {
     margin-bottom: 30px;
     width: 100%;
+    height:253px;
 }
 
 #search-page-third-section .book-info .book-info-content h6 {
@@ -919,7 +952,8 @@ select.form-control {
 }
 
 #search-page-third-section .book-title {
-    min-height: 80px;
+   height: 60px;
+   overflow:hidden; 
 }
 
 .rate {
@@ -947,14 +981,13 @@ select.form-control {
 
 .rate > input:checked ~ label {
     color: #ffc107;
-
 }
 
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #ffc107;
-
-}
+/*.rate:not(:checked) > label:hover,*/
+/*.rate:not(:checked) > label:hover ~ label */
+.rate .dorate {
+        color: #ffc107 !important;
+    }
 
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
@@ -962,10 +995,52 @@ select.form-control {
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #ffc107;
-
 }
 
-.pagination {
+page-item1 {
+    padding: 5px 5px;
+    margin-left: 6px;
+}
+
+.page-item1 a {
+    border: none;
+    padding: 5px 5px;
+}
+
+    .page-item1 a:hover,
+    .page-item1 a:focus,
+    ul.pagination .active {
+        text-decoration: none;
+        background-color: #6255a5;
+        text-align: center;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        
+    }
+
+ul.pagination .active {
+    color: white !important;
+}
+.btn-pagination {
+    color: white !important;
+}
+
+ul.pagination > li > a:hover,
+ul.pagination > li > a:focus {
+    color: white;
+}
+
+ul.pagination > li > a {
+    color: #333333;
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0 3px;
+}
+
+./*pagination {
     margin-bottom: 60px;
 }
 
@@ -986,7 +1061,7 @@ select.form-control {
     border-radius: 50%;
     line-height: 20px;
 
-}
+}*/
 
 
 /*===============================
@@ -996,7 +1071,9 @@ select.form-control {
 #notes-details-first-section {
     margin-top: 160px;
 }
-
+.givemar {
+    margin-top:160px;
+}
 #notes-details-first-section .head h3,
 #notes-details-second-section .head h3 {
     font-family: "Open Sans", sans-serif;
