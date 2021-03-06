@@ -8,14 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using NotesMarketplace.Models;
 using PagedList;
-using Syncfusion.Pdf;
-using Syncfusion.Pdf.Parsing;
 
 namespace NotesMarketplace.Controllers
 {
     public class HomeController : Controller
     {
         static int userid = 0;
+        static String route = null;
         private NotesMarketplaceEntities db = new NotesMarketplaceEntities();
 
         public ActionResult Home()
@@ -67,18 +66,18 @@ namespace NotesMarketplace.Controllers
             }
         }
 
-        [HttpPost]
+        
         public ActionResult PublishNote(NotesDetail notesDetail)
         {
             if (notesDetail != null)
             {
                 notesDetail.F_K_NoteStatus = 3;
-                return AddNotes(notesDetail);
+                return RedirectToAction("AddNotes", "Home", new { notesDetail = notesDetail});
+               // return AddNotes(notesDetail);
             }
             return AddNotes("");
         }
 
-        [HttpPost]
         public ActionResult SaveNote(NotesDetail notesDetail)
         {
             if (notesDetail != null)
@@ -339,6 +338,7 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult Dashboard()
         {
+            route = "Dashboard";
             if (userid != 0)
             {
                 ViewBag.IsValid = "true";
@@ -351,6 +351,70 @@ namespace NotesMarketplace.Controllers
                 Statistic statistic = db.Statistics.FirstOrDefault(m => m.F_K_User == userid);
                 ViewBag.statistic = statistic;
                 return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Home");
+            }
+        }
+
+        public ActionResult BuyerRequests(int? pageindex,String search, String shorthead)
+        {
+            route = "BuyerRequests";
+            if (userid != 0)
+            {
+                ViewBag.IsValid = "true";
+                var userprofile = db.UserProfiles.FirstOrDefault(m => m.F_K_User == userid);
+                if (userprofile != null)
+                {
+                    ViewBag.ProfilePicture = userprofile.ProfilePicture;
+                }
+                
+                List<DownloadRequests> requests = new List<DownloadRequests>();
+                List<DownloadedNote> downloadedNotes = db.DownloadedNotes.Where(m => m.IsApproved == false && m.F_K_User_Seller==userid).ToList();
+                foreach(DownloadedNote myrequest in downloadedNotes)
+                {
+                    DownloadRequests dr = new DownloadRequests();
+                    dr.downloadedNote = myrequest;
+                    dr.phonenumber= db.UserProfiles.FirstOrDefault(m => m.F_K_User == myrequest.F_K_User_Buyer).PhoneNumber;
+                    dr.emailid = db.Users.FirstOrDefault(m => m.P_K_User == myrequest.F_K_User_Buyer).EmailId;
+
+                    requests.Add(dr);
+                }
+
+                requests = requests.OrderByDescending(m => m.downloadedNote.CreatedDate).ToList();
+
+                if(!String.IsNullOrEmpty(search))
+                {
+                    requests = requests.Where(m =>m.downloadedNote.Title.ToLower().StartsWith(search.ToLower()) || m.downloadedNote.SellPrice.ToString().Equals(search.ToString()) || m.downloadedNote.Category.ToLower().StartsWith(search)|| m.emailid.Equals(search)||m.phonenumber.ToString().Equals(search.ToString())).ToList();
+                }
+                if(!String.IsNullOrEmpty(shorthead))
+                {
+                    if (shorthead.Equals("title"))
+                    {
+                        requests = requests.OrderBy(m => m.downloadedNote.Title).ToList();
+                    }
+                    if (shorthead.Equals("category"))
+                    {
+                        requests = requests.OrderBy(m => m.downloadedNote.Category).ToList();
+
+                    }
+                    if(shorthead.Equals("phonenumber"))
+                    {
+
+                        requests = requests.OrderBy(m => m.phonenumber).ToList();
+                    }
+                    if(shorthead.Equals("buyer"))
+                    {
+
+                        requests = requests.OrderBy(m => m.emailid).ToList();
+                    }
+                    if(shorthead.Equals("price"))
+                    {
+                        requests = requests.OrderBy(m => m.downloadedNote.SellPrice).ToList();
+                    }
+                }
+                return View(requests.ToPagedList(pageindex ?? 1,10));
             }
             else
             {
@@ -461,6 +525,10 @@ namespace NotesMarketplace.Controllers
                             userid = auth.P_K_User;
                             if (auth.IsDetailsSubmitted == true)
                             {
+                                if(!String.IsNullOrEmpty(route))
+                                {
+                                    return RedirectToAction(route, "Home");
+                                }
                                 return RedirectToAction("Home", "Home");
                             }
                             else
@@ -490,6 +558,7 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult FAQ()
         {
+            route = "FAQ";
             if (userid != 0)
             {
                 ViewBag.IsValid = "true";
@@ -526,15 +595,14 @@ namespace NotesMarketplace.Controllers
             {
                 NotesDetail noteDetails = db.NotesDetails.FirstOrDefault(m => m.P_K_Note.ToString().Equals(noteid));
                 if (noteDetails != null)
-                {
-                   
-                    if (userid==noteDetails.F_K_User)
-                    {
-                        return RedirectToAction("DownloadFile", "Home", new { filename = noteDetails.NoteAttachment });
-                    }
+                { 
                     if(SellPrice!=null)
                     {
-                        if(userid==0)
+                        if (userid == noteDetails.F_K_User)
+                        {
+                            return RedirectToAction("DownloadFile", "Home", new { filename = noteDetails.NoteAttachment });
+                        }
+                        if (userid==0)
                         {
                             return RedirectToAction("Login","Home");
                         }
@@ -563,6 +631,11 @@ namespace NotesMarketplace.Controllers
                         }
                         else
                         {
+                            User user = db.Users.FirstOrDefault(m => m.P_K_User == noteDetails.F_K_User);
+                            ViewBag.sellername = user.FirstName+" "+user.LastName;
+                            User user2 = db.Users.FirstOrDefault(m => m.P_K_User == userid);
+                            ViewBag.name = user2.FirstName;
+
                             if (isexist)
                             {
                                 bool isapproved = db.DownloadedNotes.Any(m => m.F_K_Note == noteDetails.P_K_Note && m.F_K_User_Buyer == userid && m.F_K_User_Seller == noteDetails.F_K_User && m.IsApproved == true);
@@ -572,7 +645,7 @@ namespace NotesMarketplace.Controllers
                                 }
                                 else
                                 {
-                                    ViewBag.name = db.Users.FirstOrDefault(m => m.P_K_User == noteDetails.F_K_User);
+
                                     ViewBag.NotApproved = "true";
                                 }
                             }
@@ -586,6 +659,9 @@ namespace NotesMarketplace.Controllers
                             }
                         }
                     }
+
+                     ViewBag.numofreview = db.Feedbacks.Where(m => m.F_K_Note.ToString().Equals(noteid)).Count();
+                     ViewBag.inappropriate = db.SpamReports.Where(m => m.F_K_Note.ToString().Equals(noteid)).Count();
                     return View(noteDetails);
                 }
             }
@@ -594,6 +670,7 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult Search(int? pageindex, String search, String university, String type, String country, String course, String rating, String category)
         {
+            route = "Search";
             List<NotesDetail> notes = db.NotesDetails.Where(v => v.F_K_NoteStatus == 4 && v.IsActive).ToList();
             if (userid != 0)
             {
@@ -715,6 +792,7 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult ContactUs()
         {
+            route = "ContactUs";
             if (userid != 0)
             {
                 ViewBag.IsValid = "true";
@@ -844,8 +922,9 @@ namespace NotesMarketplace.Controllers
 
         public ActionResult LogOut()
         {
+            route = null;
             userid = 0;
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Home", "Home");
         }
     }
 }

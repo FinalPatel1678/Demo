@@ -60,7 +60,7 @@
                                     @Html.ActionLink("Sell Your Notes", "Dashboard", "Home", null, new { @class = "nav-link" })
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span>Buyer Requests</span></a>
+                                    @Html.ActionLink("Buyer Requests", "BuyerRequests", "Home", null, new { @class = "nav-link" })
                                 </li>
                                 <li class="nav-item">
                                     @Html.ActionLink("FAQ", "FAQ", "Home", null, new { @class = "nav-link" })
@@ -124,7 +124,7 @@
                                         @Html.ActionLink("Sell Your Notes", "Dashboard", "Home", null)
                                     </li>
                                     <li>
-                                        <a href="#"><span>Buyer Requests</span></a>
+                                        @Html.ActionLink("Buyer Requests", "BuyerRequests", "Home", null)
                                     </li>
                                     <li>
                                         @Html.ActionLink("FAQ", "FAQ", "Home", null)
@@ -188,7 +188,7 @@
                                     @Html.ActionLink("Sell Your Notes", "Dashboard", "Home", null, new { @class = "nav-link" })
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span>Buyer Requests</span></a>
+                                    @Html.ActionLink("Buyer Requests", "BuyerRequests", "Home", null, new { @class = "nav-link" })
                                 </li>
                                 <li class="nav-item">
                                     @Html.ActionLink("FAQ", "FAQ", "Home", null, new { @class = "nav-link" })
@@ -241,7 +241,7 @@
                                         @Html.ActionLink("Sell Your Notes", "Dashboard", "Home", null)
                                     </li>
                                     <li>
-                                        <a href="#"><span>Buyer Requests</span></a>
+                                        @Html.ActionLink("Buyer Requests", "BuyerRequests", "Home", null)
                                     </li>
                                     <li>
                                         @Html.ActionLink("FAQ", "FAQ", "Home", null)
@@ -313,8 +313,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/mypopper")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/popper.min.js")
+    @Scripts.Render("~/Scripts/bootstrap.js")
     @Scripts.Render("~/bundles/myscript")
 
 </body>

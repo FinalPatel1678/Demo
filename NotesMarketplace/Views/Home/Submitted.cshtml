@@ -62,7 +62,7 @@
                                             <td class="align-middle">
                                                 <div class="row text-center">
                                                     <div class="col-11 col-sm-11 col-md-9 col-lg-7 dopointer">
-                                                        <img src="~/Content/images/Dashboard/eye.png" alt="Edit" class="img-fluid">
+                                                        <img src="~/Content/images/Dashboard/eye.png" alt="Edit" class="img-fluid dopointer" onclick="@("window.location.href='" + @Url.Action("NoteDetails","Home",new {noteid=mynotes.P_K_Note})+"'");">
                                                     </div>
                                                 </div>
                                             </td>

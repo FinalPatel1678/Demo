@@ -409,10 +409,10 @@
                     <!-- Login Button -->
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-6">
-                            <button type="submit" formaction="@Url.Action("SaveNote","Home")" formmethod="post" class="btn btn-primary btn-block login-btn text-uppercase text-center" id="mybtn"><b>save</b></button>
+                            <button type="submit" onclick=""@("window.location.href='" + @Url.Action("SaveNote", "Home") + "'") class="btn btn-primary btn-block login-btn text-uppercase text-center" id="mybtn"><b>save</b></button>
                         </div>
                         <div class="col-md-3 col-sm-6 col-6">
-                            <button type="submit" formaction="@Url.Action("PublishNote","Home")" formmethod="post" class="btn btn-primary btn-block login-btn text-uppercase text-center" id="mybtn"><b>Publish</b></button>
+                            <button type="submit" onclick=""@("window.location.href='" + @Url.Action("PublishNote", "Home") + "'") class="btn btn-primary btn-block login-btn text-uppercase text-center" id="mybtn"><b>Publish</b></button>
                         </div>
                     </div>
                 </div>

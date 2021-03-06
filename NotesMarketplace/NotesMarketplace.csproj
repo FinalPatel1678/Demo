@@ -184,6 +184,7 @@
       <DependentUpon>Final.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContactUs.cs" />
+    <Compile Include="Models\DownloadRequests.cs" />
     <Compile Include="Models\DummyNotedetails.cs" />
     <Compile Include="Models\DummyUser.cs" />
     <Compile Include="Models\DummyUserProfile.cs" />
@@ -347,6 +348,7 @@
     <Content Include="Scripts\js\conflict-detection.min.js" />
     <Content Include="Scripts\js\fontawesome.js" />
     <Content Include="Scripts\js\fontawesome.min.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\js\regular.js" />
     <Content Include="Scripts\js\regular.min.js" />
     <Content Include="Scripts\js\solid.js" />
@@ -380,11 +382,6 @@
     <Content Include="Final.edmx.diagram">
       <DependentUpon>Final.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -399,17 +396,16 @@
     <Content Include="Uploads\BookPicture\2128022021135239.PNG" />
     <Content Include="Uploads\BookPicture\2128022021141320.PNG" />
     <Content Include="Uploads\BookPicture\Default.png" />
-    <Content Include="Uploads\BookPreview\2101032021144651.PNG" />
     <Content Include="Uploads\BookPreview\2127022021103745.pdf" />
     <Content Include="Uploads\BookPreview\2127022021103841.pdf" />
     <Content Include="Uploads\BookPreview\2127022021110855.pdf" />
-    <Content Include="Uploads\BookPreview\2128022021135239.PNG" />
     <Content Include="Uploads\Books\2127022021103745.pdf" />
     <Content Include="Uploads\Books\2127022021103841.pdf" />
     <Content Include="Uploads\Books\2127022021110855.pdf" />
     <Content Include="Uploads\ProfilePicture\21hfhbshvbadyig.PNG" />
     <Content Include="Uploads\ProfilePicture\23hfhbshvbadyig.PNG" />
     <Content Include="Uploads\ProfilePicture\Default.png" />
+    <None Include="Views\Home\BuyerRequests.cshtml" />
     <Content Include="Views\Home\InProgress.cshtml" />
     <Content Include="Uploads\Books\2101032021144651.pdf" />
     <Content Include="Uploads\Books\2101032021145158.pdf" />
@@ -483,8 +479,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

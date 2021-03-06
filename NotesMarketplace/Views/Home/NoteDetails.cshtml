@@ -27,11 +27,11 @@
                                     @{
                                         if (Model.BookPicture != null)
                                         {
-                                            <img class="img-fluid" src="~/Uploads/BookPicture/@Model.BookPicture">
+                                            <img class="img-fluid bookpicture" src="~/Uploads/BookPicture/@Model.BookPicture">
                                         }
                                         else
                                         {
-                                            <img class="img-fluid" src="~/Uploads/BookPicture/Default.png">
+                                            <img class="img-fluid bookpicture" src="~/Uploads/BookPicture/Default.png">
                                         }
                                     }
                                 </div>
@@ -39,7 +39,7 @@
 
                                     <h2>@Model.Title</h2>
                                     <h5>@Model.Category</h5>
-                                    <p class="text-left">@Model.NotesDescription </p>
+                                    <p class="text-left notedesc">@Model.NotesDescription </p>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-7 col-lg-9">
                                             <form>
@@ -78,7 +78,7 @@
                                                                 </div>
                                                                 <div class="middel-content text-left">
                                                                     <h3>Dear @ViewBag.name,</h3>
-                                                                    <p class="para-1">As this is paid notes-you need to pay to seller Rahil Shah offline.We will send him an email that you want to download this note.He may contact you further for payment process completion.</p>
+                                                                    <p class="para-1">As this is paid notes-you need to pay to seller @ViewBag.sellername offline.We will send him an email that you want to download this note.He may contact you further for payment process completion.</p>
                                                                     <p class="para-2">In Case, you have urgency,<br>Please contact us on +9195538863848.</p>
                                                                     <p class="para-3">Once he recevies the payment and acknowledge us-Seleted notes you can see over my downloads tab for download.</p>
                                                                     <p class="para-4">Have a good day.</p>
@@ -96,9 +96,6 @@
                                 </div>
                             </div>
                         </div>
-                        @{
-                            NotesMarketplaceEntities db = new NotesMarketplaceEntities();
-                        }
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-5 margin-top">
                             <div class="row">
                                 <div class="col-5 col-sm-5 col-md-5 left-side-note">
@@ -113,15 +110,9 @@
                                 </div>
                                 @{
                                     double rating = 0;
-                                    List<Feedback> feedbacks = null;
-                                    var numofreview = db.Feedbacks.Where(m => m.F_K_Note == Model.P_K_Note).Count();
-                                    var inappropriate = db.SpamReports.Where(m => m.F_K_Note == Model.P_K_Note).Count();
-                                    int count=db.Feedbacks.Where(m => m.F_K_Note == Model.P_K_Note).Count();
-                                    if(count!=0)
-                                    {
-                                        rating = db.Feedbacks.Where(m => m.F_K_Note == Model.P_K_Note).Average(m => m.Review);
-                                        feedbacks = db.Feedbacks.Where(m => m.F_K_Note == Model.P_K_Note).ToList();
-                                    }
+
+                                    var numofreview = ViewBag.numofreview;
+                                    var inappropriate = ViewBag.inappropriate;
                                 }
                             <div class="col-7 col-sm-7 col-md-7 right-side-note text-right">
                                 @if (String.IsNullOrEmpty(Model.InstitutionName))
@@ -207,29 +198,19 @@
                             String preview = null;
                             if (Model.NotePreview != null)
                             {
-                                preview = "~/Uploads/BookPreview/" + Model.NotePreview;
+                                preview = "https://localhost:44381/Uploads/BookPreview/" + Model.NotePreview;
                             }
                             else
                             {
-                                preview = "~/Uploads/Books/" + Model.NoteAttachment;
+                                preview = "https://localhost:44381/Uploads/Books/" + Model.NoteAttachment;
                             }
                         }
-                        @preview
                     </div>
                     <div id="Iframe-Cicis-Menu-To-Go" class="set-margin-cicis-menu-to-go set-padding-cicis-menu-to-go set-border-cicis-menu-to-go set-box-shadow-cicis-menu-to-go center-block-horiz">
                         <div class="responsive-wrapper
      responsive-wrapper-padding-bottom-90pct" style="-webkit-overflow-scrolling: touch; overflow: auto;">
                           
-                            @*<iframe src="@preview">
-                                <p style="font-size: 110%;">
-                                    <em>
-                                        <strong>ERROR: </strong>
-                                        An &#105;frame should be displayed here but your browser version does not support &#105;frames.
-                                    </em> Please update your browser to its most recent version and try again, or access the file <a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">with this link.</a>
-                                </p>
-                            </iframe>*@
-                           
-                            <iframe src=@preview class="responsive-iframe" title="description"><p>Your web browser doesn't have a PDF plugin.Instead you can <a href=@preview>click here to download the PDF file.</a></p></iframe>
+                            <iframe src="@preview" class="responsive-iframe" title="description"><p>Your web browser doesn't have a PDF plugin.Instead you can <a href=@preview>click here to download the PDF file.</a></p></iframe>
                         </div>
                     </div>
                 </div>
